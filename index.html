@@ -409,6 +409,142 @@
       margin-top: 12px;
     }
 
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 99;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(720px, 100%);
+      max-height: 88vh;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid #dbe8ff;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 30px 90px rgba(15, 23, 42, 0.26);
+      text-align: left;
+      animation: popModal 0.25s ease;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .modal-header h2 {
+      font-size: 32px;
+      color: #16213e;
+      margin: 0;
+    }
+
+    .modal-close {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: none;
+      background: #eef4ff;
+      color: #16213e;
+      font-size: 28px;
+      line-height: 1;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .modal-desc {
+      color: #5b6b88;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .modal-field {
+      margin-bottom: 14px;
+    }
+
+    .modal-field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #16213e;
+      font-weight: 900;
+    }
+
+    .modal-field input,
+    .modal-field textarea {
+      width: 100%;
+      padding: 15px 17px;
+      border-radius: 16px;
+      border: 1px solid #d8e2f5;
+      outline: none;
+      font-size: 15px;
+      color: #16213e;
+      background: white;
+    }
+
+    .modal-field textarea {
+      min-height: 130px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .button-send {
+      background: linear-gradient(135deg, #26c6ff, #6d5dfc, #ec4bc4);
+      color: white;
+    }
+
+    .button-cancel {
+      background: #f3f6ff;
+      color: #314c96;
+    }
+
+    @keyframes popModal {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 640px) {
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .modal-header h2 {
+        font-size: 26px;
+      }
+    }
+
     @keyframes floatBlob {
       0%, 100% { transform: translate(0, 0) scale(1); }
       50% { transform: translate(22px, -26px) scale(1.07); }
@@ -501,6 +637,46 @@
     </section>
   </main>
 
+  <div id="contactModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Kirim Pesan</h2>
+        <button class="modal-close" onclick="tutupModalKontak()">×</button>
+      </div>
+
+      <p class="modal-desc">
+        Isi data berikut terlebih dahulu. Setelah itu, pesan akan otomatis diarahkan ke WhatsApp contact person yang kamu pilih.
+      </p>
+
+      <div class="modal-grid">
+        <div class="modal-field">
+          <label for="modalNama">Nama</label>
+          <input id="modalNama" type="text" placeholder="Nama lengkap" />
+        </div>
+
+        <div class="modal-field">
+          <label for="modalNrp">NRP</label>
+          <input id="modalNrp" type="text" placeholder="NRP" />
+        </div>
+      </div>
+
+      <div class="modal-field">
+        <label for="modalTujuan">Tujuan Kontak</label>
+        <input id="modalTujuan" type="text" readonly />
+      </div>
+
+      <div class="modal-field">
+        <label for="modalPesan">Pesan</label>
+        <textarea id="modalPesan" placeholder="Tulis pertanyaan atau kendala kamu di sini..."></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button class="button-send" onclick="kirimPesanKontak()">Kirim via WhatsApp</button>
+        <button class="button-cancel" onclick="tutupModalKontak()">Batal</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // =====================================================
     // LINK PENTING
@@ -511,15 +687,42 @@
     const nomorCPZain = "6281233795775";
     const linkGFormPendataan = "https://intip.in/DataIkomaStaffps/";
 
-    function buatLinkWA(nomor, nama, nrp) {
-      const pesan = encodeURIComponent(
-        `Halo Kak, saya ingin bertanya terkait Staff Partner 11th Physics Summit.
+    let kontakAktif = {
+      namaCP: "",
+      nomorCP: "",
+      namaPeserta: "",
+      nrpPeserta: ""
+    };
 
-Nama: ${nama}
-NRP: ${nrp}
-Pesan: `
+    function bukaModalKontak(namaCP, nomorCP, namaPeserta, nrpPeserta) {
+      kontakAktif = { namaCP, nomorCP, namaPeserta, nrpPeserta };
+      document.getElementById("modalNama").value = namaPeserta || "";
+      document.getElementById("modalNrp").value = nrpPeserta || "";
+      document.getElementById("modalTujuan").value = `${namaCP} (Contact Person)`;
+      document.getElementById("modalPesan").value = "";
+      document.getElementById("contactModal").classList.add("show");
+    }
+
+    function tutupModalKontak() {
+      document.getElementById("contactModal").classList.remove("show");
+    }
+
+    function kirimPesanKontak() {
+      const nama = document.getElementById("modalNama").value.trim();
+      const nrp = document.getElementById("modalNrp").value.trim();
+      const pesanTambahan = document.getElementById("modalPesan").value.trim();
+
+      if (!nama || !nrp || !pesanTambahan) {
+        alert("Nama, NRP, dan pesan wajib diisi terlebih dahulu ya.");
+        return;
+      }
+
+      const pesan = encodeURIComponent(
+        `Halo Kak ${kontakAktif.namaCP}, saya ingin bertanya terkait Staff Partner 11th Physics Summit.\n\nNama: ${nama}\nNRP: ${nrp}\nPesan: ${pesanTambahan}`
       );
-      return `https://wa.me/${nomor}?text=${pesan}`;
+
+      window.open(`https://wa.me/${kontakAktif.nomorCP}?text=${pesan}`, "_blank");
+      tutupModalKontak();
     }
 
     // =====================================================
@@ -576,7 +779,7 @@ Pesan: `
       "5001251020": "Novin Zhafira Kwarisd",
       "5001251106": "M. Faris Nubaid",
       "5001251104": "Muhammad Rabbani Adnan Al Awali",
-      "5001251078": "Muhammad Naufal Khalaf",
+    mad Naufal Khalaf",
       "5001251073": "Muhammad Alfarizi",
       "5001251081": "Muhammad Bayu Ramadhan",
       "5001251103": "Rurry Septantri Kurniawan",
@@ -763,14 +966,12 @@ Pesan: `
             kamu dapat menghubungi contact person di bawah.
           </p>
           <div class="cp-row">
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, pesertaProses[nrp], nrp)}" target="_blank">
+            <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${pesertaProses[nrp]}', '${nrp}')">
               Tanya CP Salwa
-            </a>
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, pesertaProses[nrp], nrp)}" target="_blank">
+            </button>
+            <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${pesertaProses[nrp]}', '${nrp}')">
               Tanya CP Zain
-            </a>
-          </div>
-          <br />
+            </button>      <br />
           <a class="button-link button-back" href="./">
             Cek NRP Lain
           </a>
@@ -789,14 +990,12 @@ Pesan: `
             Terima kasih atas antusiasme dan partisipasinya. Tetap semangat dan sampai bertemu di kesempatan berikutnya!
           </p>
           <div class="cp-row">
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, pesertaTidakLolosBerkas[nrp], nrp)}" target="_blank">
+            <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${pesertaTidakLolosBerkas[nrp]}', '${nrp}')">
               Tanya CP Salwa
-            </a>
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, pesertaTidakLolosBerkas[nrp], nrp)}" target="_blank">
+            </button>
+            <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${pesertaTidakLolosBerkas[nrp]}', '${nrp}')">
               Tanya CP Zain
-            </a>
-          </div>
-          <br />
+            </button>      <br />
           <a class="button-link button-back" href="./">
             Cek NRP Lain
           </a>
@@ -811,14 +1010,12 @@ Pesan: `
             Pastikan NRP sudah benar atau hubungi CP Salwa jika ada kendala.
           </p>
           <div class="cp-row">
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, 'Nama belum terdata', nrp)}" target="_blank">
+            <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, 'Nama belum terdata', '${nrp}')">
               Tanya CP Salwa
-            </a>
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, 'Nama belum terdata', nrp)}" target="_blank">
+            </button>
+            <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, 'Nama belum terdata', '${nrp}')">
               Tanya CP Zain
-            </a>
-          </div>
-          <br />
+            </button>      <br />
           <a class="button-link button-back" href="./">
             Cek NRP Lain
           </a>
@@ -868,15 +1065,12 @@ Pesan: `
         <br />
 
         <div class="cp-row">
-          <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, nama, nrp)}" target="_blank">
+          <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${nama}', '${nrp}')">
             Tanya CP Salwa
-          </a>
-          <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, nama, nrp)}" target="_blank">
+          </button>
+          <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${nama}', '${nrp}')">
             Tanya CP Zain
-          </a>
-        </div>
-
-        <br />
+          </button>   <br />
 
         <a class="button-link button-back" href="./">
           Cek NRP Lain
