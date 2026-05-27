@@ -258,7 +258,28 @@
       border-radius: 18px;
       background: #f8fbff;
       border: 1px solid #dbe8ff;
+      text-align: left;
+    }
+
+    .info-box p {
       text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .next-step {
+      background: #f4f8ff;
+    }
+
+    .info-list {
+      margin: 0;
+      padding-left: 22px;
+      color: #334155;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .info-list li {
+      margin-bottom: 6px;
     }
 
     .decorations {
@@ -464,7 +485,7 @@
 
     const nomorCPSalwa = "6281362192288";
     const nomorCPZain = "6281233795775";
-    const linkGFormPendataan = "https://forms.gle/ISI_LINK_GFORM_DI_SINI";
+    const linkGFormPendataan = "https://intip.in/DataIkomaStaffps/";
 
     // =====================================================
     // DAFTAR STIKER RANDOM UNTUK PESERTA LOLOS
@@ -786,21 +807,26 @@
         <img src="${stikerRandom}" alt="Sticker Lolos" class="sticker-lolos" />
 
         <div class="info-box">
-          <p>
-            Kepo ya kamu masuk divisi apa? Sabar dulu yaa 😼
-            Informasi pembagian divisi akan diumumkan saat <b>Welcome Party</b>
-            pada <b>tanggal 6</b>. Jangan lupa hadir!
-          </p>
+          <p><b>Kepo ya kamu masuk divisi apa?</b> Sabar dulu yaa 😼</p>
+          <ul class="info-list">
+            <li>Informasi pembagian divisi akan diumumkan saat <b>Welcome Party</b>.</li>
+            <li>Welcome Party dilaksanakan pada <b>tanggal 6</b>.</li>
+            <li>Jangan lupa hadir ya!</li>
+          </ul>
         </div>
 
-        <p style="margin-top: 16px;">
-          Langkah selanjutnya, kamu wajib mengisi Google Form pendataan di bawah ini.
-          Di akhir Google Form, setelah kamu submit, akan ada link grup WhatsApp Staff Partner.
-          Link grup tersebut <b>jangan disebarkan</b> dan silakan langsung masuk ke grup ya.
-        </p>
+        <div class="info-box next-step">
+          <p><b>Langkah selanjutnya:</b></p>
+          <ul class="info-list">
+            <li>Isi Google Form pendataan melalui tombol di bawah.</li>
+            <li>Setelah submit Google Form, akan ada link grup WhatsApp Staff Partner di bagian akhir form.</li>
+            <li>Link grup <b>jangan disebarkan</b>.</li>
+            <li>Setelah mendapatkan link, silakan langsung masuk ke grup ya.</li>
+          </ul>
+        </div>
 
         <a class="button-link button-gform" href="${linkGFormPendataan}" target="_blank">
-          Isi Google Form Pendataan
+          Isi Pendataan IKOMA
         </a>
 
         <br />
