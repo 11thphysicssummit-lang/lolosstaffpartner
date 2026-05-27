@@ -694,6 +694,15 @@
       nrpPeserta: ""
     };
 
+    function amankanTeks(teks) {
+      return String(teks)
+        .replace(/\/g, "\\")
+        .replace(/'/g, "\'")
+        .replace(/"/g, "&quot;")
+        .replace(/
+/g, " ");
+    }
+
     function bukaModalKontak(namaCP, nomorCP, namaPeserta, nrpPeserta) {
       kontakAktif = { namaCP, nomorCP, namaPeserta, nrpPeserta };
       document.getElementById("modalNama").value = namaPeserta || "";
@@ -718,7 +727,11 @@
       }
 
       const pesan = encodeURIComponent(
-        `Halo Kak ${kontakAktif.namaCP}, saya ingin bertanya terkait Staff Partner 11th Physics Summit.\n\nNama: ${nama}\nNRP: ${nrp}\nPesan: ${pesanTambahan}`
+        `Halo Kak ${kontakAktif.namaCP}, saya ingin bertanya terkait Staff Partner 11th Physics Summit.
+
+Nama: ${nama}
+NRP: ${nrp}
+Pesan: ${pesanTambahan}`
       );
 
       window.open(`https://wa.me/${kontakAktif.nomorCP}?text=${pesan}`, "_blank");
@@ -779,7 +792,7 @@
       "5001251020": "Novin Zhafira Kwarisd",
       "5001251106": "M. Faris Nubaid",
       "5001251104": "Muhammad Rabbani Adnan Al Awali",
-    mad Naufal Khalaf",
+      "5001251078": "Muhammad Naufal Khalaf",
       "5001251073": "Muhammad Alfarizi",
       "5001251081": "Muhammad Bayu Ramadhan",
       "5001251103": "Rurry Septantri Kurniawan",
@@ -966,12 +979,14 @@
             kamu dapat menghubungi contact person di bawah.
           </p>
           <div class="cp-row">
-            <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${pesertaProses[nrp]}', '${nrp}')">
+            <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${amankanTeks(pesertaProses[nrp])}', '${nrp}')">
               Tanya CP Salwa
             </button>
-            <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${pesertaProses[nrp]}', '${nrp}')">
+            <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${amankanTeks(pesertaProses[nrp])}', '${nrp}')">
               Tanya CP Zain
-            </button>      <br />
+            </button>
+          </div>
+          <br />
           <a class="button-link button-back" href="./">
             Cek NRP Lain
           </a>
@@ -990,12 +1005,14 @@
             Terima kasih atas antusiasme dan partisipasinya. Tetap semangat dan sampai bertemu di kesempatan berikutnya!
           </p>
           <div class="cp-row">
-            <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${pesertaTidakLolosBerkas[nrp]}', '${nrp}')">
+            <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${amankanTeks(pesertaTidakLolosBerkas[nrp])}', '${nrp}')">
               Tanya CP Salwa
             </button>
-            <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${pesertaTidakLolosBerkas[nrp]}', '${nrp}')">
+            <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${amankanTeks(pesertaTidakLolosBerkas[nrp])}', '${nrp}')">
               Tanya CP Zain
-            </button>      <br />
+            </button>
+          </div>
+          <br />
           <a class="button-link button-back" href="./">
             Cek NRP Lain
           </a>
@@ -1010,12 +1027,14 @@
             Pastikan NRP sudah benar atau hubungi CP Salwa jika ada kendala.
           </p>
           <div class="cp-row">
-            <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, 'Nama belum terdata', '${nrp}')">
+            <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, 'Nama belum terdata', '${nrp}')">
               Tanya CP Salwa
             </button>
             <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, 'Nama belum terdata', '${nrp}')">
               Tanya CP Zain
-            </button>      <br />
+            </button>
+          </div>
+          <br />
           <a class="button-link button-back" href="./">
             Cek NRP Lain
           </a>
@@ -1065,12 +1084,15 @@
         <br />
 
         <div class="cp-row">
-          <a class="button-link <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${nama}', '${nrp}')">
+          <button class="button-link button-wa" onclick="bukaModalKontak('Salwa', nomorCPSalwa, '${amankanTeks(nama)}', '${nrp}')">
             Tanya CP Salwa
           </button>
-          <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${nama}', '${nrp}')">
+          <button class="button-link button-wa" onclick="bukaModalKontak('Zain', nomorCPZain, '${amankanTeks(nama)}', '${nrp}')">
             Tanya CP Zain
-          </button>   <br />
+          </button>
+        </div>
+
+        <br />
 
         <a class="button-link button-back" href="./">
           Cek NRP Lain
