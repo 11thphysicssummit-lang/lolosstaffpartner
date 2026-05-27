@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pengumuman Staff Partner Physics Summit</title>
+  <title>Pengumuman Staff Partner 11th Physics Summit</title>
   <style>
     * {
       box-sizing: border-box;
@@ -103,22 +103,31 @@
 
     .badge {
       display: inline-block;
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: 999px;
       background: #e8f0ff;
       color: #314c96;
       font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
       text-transform: uppercase;
       margin-bottom: 18px;
+      box-shadow: 0 8px 22px rgba(49, 76, 150, 0.08);
     }
 
     h1 {
-      font-size: clamp(30px, 6vw, 56px);
-      line-height: 1.05;
+      font-size: clamp(34px, 6vw, 60px);
+      line-height: 1.03;
       margin-bottom: 14px;
       color: #16213e;
+      font-weight: 950;
+      letter-spacing: -1.5px;
+      text-shadow: 0 4px 18px rgba(49, 76, 150, 0.12);
+    }
+
+    h2 {
+      font-weight: 950;
+      letter-spacing: -0.8px;
     }
 
     .subtitle {
@@ -226,9 +235,11 @@
     }
 
     .result h2 {
-      font-size: 28px;
+      font-size: 30px;
       margin-bottom: 10px;
       color: #16213e;
+      font-weight: 950;
+      letter-spacing: -0.9px;
     }
 
     .result p {
@@ -239,9 +250,10 @@
 
     .name {
       margin-top: 14px;
-      font-size: 20px;
-      font-weight: 800;
+      font-size: 22px;
+      font-weight: 950;
       color: #314c96;
+      letter-spacing: -0.3px;
     }
 
     .sticker-lolos {
@@ -264,6 +276,18 @@
     .info-box p {
       text-align: center;
       margin-bottom: 10px;
+    }
+
+    .division-teaser {
+      font-size: 18px;
+      line-height: 1.85;
+      color: #334155;
+      text-align: center;
+    }
+
+    .division-teaser b {
+      color: #314c96;
+      font-weight: 950;
     }
 
     .next-step {
@@ -458,12 +482,12 @@
 
     <img src="logookk%20(2).png" alt="Logo Physics Summit" class="logo" />
 
-    <div class="badge">Physics Summit</div>
+    <div class="badge">11th Physics Summit</div>
 
     <section id="homePage">
       <h1>Pengumuman Staff Partner</h1>
       <p class="subtitle">
-        Masukkan NRP kamu untuk melihat hasil seleksi Staff Partner Physics Summit.
+        Masukkan NRP kamu untuk melihat hasil seleksi Staff Partner 11th Physics Summit.
       </p>
 
       <div class="search-box">
@@ -489,7 +513,11 @@
 
     function buatLinkWA(nomor, nama, nrp) {
       const pesan = encodeURIComponent(
-        `Halo Kak, saya ingin bertanya terkait Staff Partner Physics Summit.\n\nNama: ${nama}\nNRP: ${nrp}\nPesan: `
+        `Halo Kak, saya ingin bertanya terkait Staff Partner 11th Physics Summit.
+
+Nama: ${nama}
+NRP: ${nrp}
+Pesan: `
       );
       return `https://wa.me/${nomor}?text=${pesan}`;
     }
@@ -727,7 +755,7 @@
           <h2>Hasil Kamu Masih Dalam Proses</h2>
           <p>
             Halo <b>${pesertaProses[nrp]}</b>, data NRP kamu sudah terdaftar,
-            tetapi hasil seleksi Staff Partner Physics Summit kamu masih dalam proses.
+            tetapi hasil seleksi Staff Partner 11th Physics Summit kamu masih dalam proses.
           </p>
           <div class="name">${pesertaProses[nrp]}<br>${nrp}</div>
           <p style="margin-top: 16px;">
@@ -735,10 +763,10 @@
             kamu dapat menghubungi contact person di bawah.
           </p>
           <div class="cp-row">
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, nama, nrp)}"ma belum terdata', nrp)}"ertaTidakLolosBerkas[nrp], nrp)}"ertaProses[nrp], nrp)}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, pesertaProses[nrp], nrp)}" target="_blank">
               Tanya CP Salwa
             </a>
-            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, nama, nrp)}"ma belum terdata', nrp)}"ertaTidakLolosBerkas[nrp], nrp)}"ertaProses[nrp], nrp)}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, pesertaProses[nrp], nrp)}" target="_blank">
               Tanya CP Zain
             </a>
           </div>
@@ -754,17 +782,17 @@
           <h2>Terima Kasih Sudah Berpartisipasi</h2>
           <p>
             Mohon maaf, <b>NRP tersebut sudah tidak lolos dari seleksi berkas</b>
-            Staff Partner Physics Summit.
+            Staff Partner 11th Physics Summit.
           </p>
           <div class="name">${pesertaTidakLolosBerkas[nrp]}<br>${nrp}</div>
           <p style="margin-top: 16px;">
             Terima kasih atas antusiasme dan partisipasinya. Tetap semangat dan sampai bertemu di kesempatan berikutnya!
           </p>
           <div class="cp-row">
-            <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, pesertaTidakLolosBerkas[nrp], nrp)}" target="_blank">
               Tanya CP Salwa
             </a>
-            <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, pesertaTidakLolosBerkas[nrp], nrp)}" target="_blank">
               Tanya CP Zain
             </a>
           </div>
@@ -783,10 +811,10 @@
             Pastikan NRP sudah benar atau hubungi CP Salwa jika ada kendala.
           </p>
           <div class="cp-row">
-            <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, 'Nama belum terdata', nrp)}" target="_blank">
               Tanya CP Salwa
             </a>
-            <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, 'Nama belum terdata', nrp)}" target="_blank">
               Tanya CP Zain
             </a>
           </div>
@@ -808,19 +836,18 @@
         <h2>Selamat, Kamu Lolos!</h2>
         <p>
           Selamat kepada kamu karena telah dinyatakan <b>LOLOS</b>
-          sebagai Staff Partner Physics Summit.
+          sebagai Staff Partner 11th Physics Summit.
         </p>
         <div class="name">${nama}<br>${nrp}</div>
 
         <img src="${stikerRandom}" alt="Sticker Lolos" class="sticker-lolos" />
 
         <div class="info-box">
-          <p><b>Kepo ya kamu masuk divisi apa?</b> Sabar dulu yaa 😼</p>
-          <ul class="info-list">
-            <li>Informasi pembagian divisi akan diumumkan saat <b>Welcome Party</b>.</li>
-            <li>Welcome Party dilaksanakan pada <b>tanggal 6</b>.</li>
-            <li>Jangan lupa hadir ya!</li>
-          </ul>
+          <p class="division-teaser">
+            <b>Kepo ya kamu masuk divisi apa?</b> Sabar dulu yaa 😼<br />
+            Informasi pembagian divisi akan diumumkan saat <b>Welcome Party</b>
+            pada <b>tanggal 6</b>. Jadi, jangan lupa hadir ya!
+          </p>
         </div>
 
         <div class="info-box next-step">
@@ -841,10 +868,10 @@
         <br />
 
         <div class="cp-row">
-          <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+          <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, nama, nrp)}" target="_blank">
             Tanya CP Salwa
           </a>
-          <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+          <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, nama, nrp)}" target="_blank">
             Tanya CP Zain
           </a>
         </div>
