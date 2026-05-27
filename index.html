@@ -181,8 +181,8 @@
     }
 
     .button-wa {
-      background: linear-gradient(135deg, #25d366, #9cffb5);
-      color: #111827;
+      background: linear-gradient(135deg, #6d5dfc, #8fb3ff);
+      color: white;
       margin-top: 12px;
     }
 
@@ -652,8 +652,7 @@
       "5001251105": "M. Roikhanul Athar Maulana",
       "5001251146": "Yasmine Yusnita",
       "5001251010": "Jauhar Fattan Lazuardi",
-      "5001251075": "Kerwin",
-      "5001251002": "Asturifa Agastya",
+            "5001251002": "Asturifa Agastya",
       "5001251032": "Davina Makayla Inaira W.",
       "5001251069": "Ronalius Chaniago",
       "5001251071": "Nadin Agistina",
@@ -676,9 +675,11 @@
     };
 
     const pesertaTidakLolosBerkas = {
-      // Masukkan NRP yang tidak lolos berkas di sini.
-      // Contoh:
-      // "5001250000": "Nama Peserta"
+      "5001251075": "Kerwin"
+
+      // Masukkan NRP lain yang tidak lolos berkas di sini.
+      // Formatnya:
+      // ,"5001250000": "Nama Peserta"
     };
 
     function bukaHalamanHasil() {
@@ -724,7 +725,7 @@
           <div class="name">${pesertaProses[nrp]}<br>${nrp}</div>
           <p style="margin-top: 16px;">
             Silakan menunggu informasi selanjutnya dari panitia. Jika ada pertanyaan,
-            kamu dapat menghubungi CP Salwa.
+            kamu dapat menghubungi contact person di bawah.
           </p>
           <div class="cp-row">
             <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
