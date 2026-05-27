@@ -14,23 +14,84 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #f7fbff, #eaf3ff, #dcecff);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 204, 112, 0.45), transparent 26%),
+        radial-gradient(circle at 85% 12%, rgba(122, 167, 255, 0.55), transparent 28%),
+        radial-gradient(circle at 78% 88%, rgba(37, 211, 102, 0.22), transparent 26%),
+        linear-gradient(135deg, #f7fbff, #eaf3ff, #dcecff);
       color: #1f2a44;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 24px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 360px;
+      height: 360px;
+      border-radius: 999px;
+      filter: blur(8px);
+      opacity: 0.55;
+      z-index: 0;
+      pointer-events: none;
+      animation: floatBlob 8s ease-in-out infinite;
+    }
+
+    body::before {
+      left: -130px;
+      top: 80px;
+      background: radial-gradient(circle, rgba(255, 129, 119, 0.35), transparent 68%);
+    }
+
+    body::after {
+      right: -120px;
+      bottom: 70px;
+      background: radial-gradient(circle, rgba(49, 76, 150, 0.28), transparent 68%);
+      animation-delay: -3s;
     }
 
     .container {
       width: 100%;
       max-width: 820px;
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid rgba(49, 76, 150, 0.12);
-      border-radius: 28px;
-      padding: 36px;
-      box-shadow: 0 20px 60px rgba(49, 76, 150, 0.12);
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(49, 76, 150, 0.16);
+      border-radius: 32px;
+      padding: 38px;
+      box-shadow:
+        0 24px 70px rgba(49, 76, 150, 0.16),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.7);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      backdrop-filter: blur(14px);
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background:
+        linear-gradient(90deg, transparent, rgba(122, 167, 255, 0.35), transparent),
+        linear-gradient(180deg, rgba(255, 204, 112, 0.18), transparent 38%);
+      opacity: 0.7;
+      z-index: -1;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .container::after {
+      content: "✦";
+      position: absolute;
+      top: 22px;
+      right: 28px;
+      color: #ff8177;
+      font-size: 26px;
+      animation: twinkle 1.8s ease-in-out infinite;
     }
 
     .logo {
@@ -200,10 +261,132 @@
       text-align: center;
     }
 
-    .footer {
-      margin-top: 28px;
-      color: #6b7a96;
-      font-size: 13px;
+    .decorations {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .orb {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: #7aa7ff;
+      box-shadow: 0 0 18px rgba(122, 167, 255, 0.9);
+      animation: orbit 6s ease-in-out infinite;
+      opacity: 0.85;
+    }
+
+    .orb.one {
+      top: 105px;
+      left: 48px;
+    }
+
+    .orb.two {
+      top: 68px;
+      right: 105px;
+      width: 9px;
+      height: 9px;
+      background: #ff8177;
+      box-shadow: 0 0 18px rgba(255, 129, 119, 0.9);
+      animation-delay: -2s;
+    }
+
+    .orb.three {
+      bottom: 110px;
+      right: 52px;
+      width: 10px;
+      height: 10px;
+      background: #ffcc70;
+      box-shadow: 0 0 18px rgba(255, 204, 112, 0.9);
+      animation-delay: -4s;
+    }
+
+    .neon-house {
+      position: absolute;
+      left: 26px;
+      bottom: 24px;
+      width: 90px;
+      height: 74px;
+      border: 3px solid rgba(49, 76, 150, 0.55);
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 0 20px rgba(122, 167, 255, 0.45);
+      opacity: 0.45;
+      animation: houseGlow 2.8s ease-in-out infinite;
+    }
+
+    .neon-house::before {
+      content: "";
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      left: 10px;
+      top: -34px;
+      border-left: 3px solid rgba(255, 129, 119, 0.6);
+      border-top: 3px solid rgba(255, 129, 119, 0.6);
+      transform: rotate(45deg);
+      border-radius: 10px 0 0 0;
+    }
+
+    .neon-house::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 30px;
+      left: 34px;
+      bottom: 0;
+      border-radius: 8px 8px 0 0;
+      background: rgba(255, 204, 112, 0.45);
+      box-shadow: 0 0 16px rgba(255, 204, 112, 0.9);
+    }
+
+    .sparkle {
+      position: absolute;
+      color: #314c96;
+      opacity: 0.4;
+      animation: twinkle 2.2s ease-in-out infinite;
+      font-weight: 900;
+    }
+
+    .sparkle.s1 { left: 24%; top: 28px; animation-delay: -0.4s; }
+    .sparkle.s2 { right: 23%; top: 135px; animation-delay: -1.2s; }
+    .sparkle.s3 { right: 12%; bottom: 75px; animation-delay: -0.9s; }
+
+    .cp-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    @keyframes floatBlob {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(22px, -26px) scale(1.07); }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-20%); }
+      100% { transform: translateX(20%); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.35; }
+      50% { transform: scale(1.25) rotate(12deg); opacity: 0.9; }
+    }
+
+    @keyframes orbit {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(16px, -18px); }
+    }
+
+    @keyframes houseGlow {
+      0%, 100% { opacity: 0.35; transform: translateY(0); }
+      50% { opacity: 0.6; transform: translateY(-4px); }
     }
 
     .hide {
@@ -242,6 +425,16 @@
 </head>
 <body>
   <main class="container">
+    <div class="decorations">
+      <span class="orb one"></span>
+      <span class="orb two"></span>
+      <span class="orb three"></span>
+      <span class="sparkle s1">✦</span>
+      <span class="sparkle s2">✧</span>
+      <span class="sparkle s3">✦</span>
+      <div class="neon-house"></div>
+    </div>
+
     <img src="logookk%20(2).png" alt="Logo Physics Summit" class="logo" />
 
     <div class="badge">Physics Summit</div>
@@ -265,10 +458,6 @@
       </p>
       <div id="result"></div>
     </section>
-
-    <p class="footer">
-      CP: Salwa | Physics Summit
-    </p>
   </main>
 
   <script>
@@ -276,3 +465,372 @@
     // LINK PENTING
     // Ganti link Google Form kalau link aslinya sudah ada.
     // =====================================================
+
+    const nomorCPSalwa = "6281362192288";
+    const nomorCPZain = "6281233795775";
+    const linkGFormPendataan = "https://forms.gle/ISI_LINK_GFORM_DI_SINI";
+
+    // =====================================================
+    // DAFTAR STIKER RANDOM UNTUK PESERTA LOLOS
+    // Pastikan nama file di bawah sama persis dengan nama file di GitHub.
+    // =====================================================
+
+    const daftarStikerLolos = [
+      "AAKHH.jpg",
+      "Makaco meme enojadiño.jpg",
+      "NO WAY.webp",
+      "Silly cat icon.webp",
+      "download (17).jpg",
+      "download (2).webp",
+      "download (3).webp",
+      "download (4).webp",
+      "download (5).webp",
+      "download (6).webp",
+      "lah gua mah jago.webp",
+      "stickers__.webp",
+      "stiker.webp"
+    ];
+
+    function ambilStikerRandom() {
+      const indexAcak = Math.floor(Math.random() * daftarStikerLolos.length);
+      return encodeURI(daftarStikerLolos[indexAcak]);
+    }
+
+    // =====================================================
+    // DATA PESERTA
+    // pesertaLolos = peserta yang sudah diterima
+    // pesertaProses = peserta yang masih dalam proses
+    // pesertaTidakLolosBerkas = peserta yang tidak lolos seleksi berkas
+    // =====================================================
+
+    const pesertaLolos = {
+      "5001251139": "Amanda Silva Zaskia",
+      "5001251040": "Daniyati Husniyah",
+      "5001251076": "Najla Zakiya Rizwanny",
+      "5001251110": "Cika Aline Mauludina",
+      "5001251049": "Gadis Bunga Nirwana",
+      "5001251008": "Excellent Friendly Manurung",
+      "5001251028": "Faradhia Balqis Putri Atmaja",
+      "5001251091": "Qonita Nurfaizah",
+      "5001251013": "Valessa Zalsabrina",
+      "5001251077": "Faradiba Nur Anisa",
+      "5001251056": "Nurun Fadila",
+      "5001251019": "Witri Laila",
+      "5001251053": "Nadia Leena Pratiwi",
+      "5001251021": "Nur Azizah Anuha",
+      "5001251061": "ARYA LAYLY MAHARANI",
+      "5001251080": "Ayu Nisa Aprilia",
+      "5001251112": "Dzaki Ammar muniif",
+      "5001251020": "Novin Zhafira Kwarisd",
+      "5001251106": "M. Faris Nubaid",
+      "5001251104": "Muhammad Rabbani Adnan Al Awali",
+      "5001251078": "Muhammad Naufal Khalaf",
+      "5001251073": "Muhammad Alfarizi",
+      "5001251081": "Muhammad Bayu Ramadhan",
+      "5001251103": "Rurry Septantri Kurniawan",
+      "5001251057": "Asri Tri Wulan Sari",
+      "5001251030": "Muhammad Yusuf Ryan",
+      "5001251029": "Galang Addia Ramadan",
+      "5001251116": "Ilyas",
+      "5001251070": "Wahyu Fauji Sianturi",
+      "5001251095": "Oktavya Zahra Rachmadhani",
+      "5001251062": "Ester Salita Br P Bangun",
+      "5001251131": "Julia Cinta Az Zahra",
+      "5001251022": "Hanifa Nabi'il Wining",
+      "5001251145": "Fazle Mawla Febrio Rhizky",
+      "5001251150": "Muhammad Arnico Natha",
+      "5001251094": "Athian Syafiq Al Hafidz",
+      "5001251018": "Abil Qumfa Anzir",
+      "5001251135": "Adinda Ayu Anandita",
+      "5001251117": "Jasmine Raqilla Mirza",
+      "5001251098": "O'neall Dewata Giovani",
+      "5001251088": "Khoirun Nisa",
+      "5001251017": "Ahmad Satrio Wicaksono",
+      "5001251007": "Maria Rachel Jochi Carmelita Gurning",
+      "5001251044": "Nahilah",
+      "5001251051": "Verlyta Adjitya Purwaningtyas",
+      "5001251100": "Fajar Faizal",
+      "5001251111": "Adya Rifhatussholikhah",
+      "5001251041": "Arya Putra Laksmana",
+      "5001251123": "Zaidan Fayyadh Ramadhan",
+      "5001251083": "Nabeel Fatkhan Mubina",
+      "5001251054": "Argata Viradya Putra Hariesna",
+      "5001251043": "Muhammad Aryan Yudha Tama",
+      "5001251148": "Hamim Ayatullah",
+      "5001251035": "Calvin Alifian Putra Pradana",
+      "5001251132": "Rifqi Azril Firdaus",
+      "5001251089": "M Azis Fatchur Ramdhani",
+      "5001251108": "Muhammad Wafy Al Ahdi K.H",
+      "5001251086": "Leonardus Adhittya Ande Sura",
+      "5001251124": "Geovany Pradipta Soeprapto",
+      "5001251063": "Erlita Putri Febyanti",
+      "5001251120": "Nency Evelyn Alantranaya",
+      "5001251096": "Aisyah Mahirani Salsabila",
+      "5001251014": "Atia Shalsabela Arifiana",
+      "5001251042": "Gratia Cynthia Setio Maharani",
+      "5001251149": "Beryl Vania Alisyah",
+      "5001251015": "Tri Ayu Wulandari",
+      "5001251055": "savina muzdalifa",
+      "5001251158": "Neysa Putri Aurelia",
+      "5001251064": "Anandio Muhammad Abyan Hafish"
+    };
+
+    const pesertaProses = {
+      "5001251122": "Rahmadita Kurnia Putri",
+      "5001251047": "Nazwa Hifzy Hrp",
+      "5001251037": "Dian Rafa Azalea Putri",
+      "5001251121": "Muhammad Daffa Abiyyu Ramdhan",
+      "5001251154": "Gaida Ulayya Aziizah",
+      "5001251031": "Anisa Dwijasista",
+      "5001251072": "Diana Gayatri Utami",
+      "5001251115": "Arga Haris Surya Putra",
+      "5001251130": "Widya Resti Indriyani",
+      "5001251099": "Berliana Ihtyvilla Itqiyah",
+      "5001251011": "Ananda Akbar Choiruna",
+      "5001251102": "Nagmy Daya Rieziequmullah",
+      "5001251026": "Raymond Benaya Kondamara Tidah",
+      "5001251127": "Yefi Ragelia Marshadani",
+      "5001251006": "Syifa Amelia Widyaningrum",
+      "5001251027": "Rahma Nur Annisa",
+      "5001251074": "Lombardi Lumbantoruan",
+      "5001251118": "Riana Salsabela Putri",
+      "5001251009": "Muhamad Irfan Hidayatullah",
+      "5001251012": "Ayn Al Qodiy Zikri Rahullah",
+      "5001251087": "Nikita Firdausi",
+      "5001251114": "Dimas Budi Al Bukhori",
+      "5001251093": "Khansa Zahrotul ‘Arsy",
+      "5001251137": "Tia Salsabila",
+      "5001251085": "Muhammad Mukti Yazdan",
+      "5001251151": "Naufal Abid Affandi",
+      "5001251128": "Dewanda Angga Prameswara",
+      "5001251038": "SONYA WADI RAHMAWATI",
+      "5001251082": "Mohammad Farhan Alwanul Faizin",
+      "5001251059": "Rosalina sijabat",
+      "5001251004": "Fahad Dzaky Abdillah",
+      "5001251138": "Rafli darma kuswandi",
+      "5001251152": "Bima Prakasa Setiawanda",
+      "5001251084": "Hasna Puspakitri Dewi",
+      "5001251046": "Najwa Oktavia Ramadhani",
+      "5001251144": "Daniel Baglrene Krista Caraka",
+      "5001251005": "Aidil Praditya Oktavianto",
+      "5001251090": "Muhammad Rafi`ul Tsany",
+      "5001251136": "Deva Putra Pratama",
+      "5001251016": "Giffar Fahrezi",
+      "5001251119": "Aditya Apriansyah",
+      "5001251141": "Nashya Devanty Putri Walujo",
+      "5001251107": "Elghan Reynatan Artadi",
+      "5001251125": "Kadek Wira Darpawan",
+      "5001251039": "Eca Agustin Rahmawati",
+      "5001251033": "Lohita Sitaresmi",
+      "5001251050": "Dimas Tri Baskoro",
+      "5001251023": "Teguh Agus Susanto",
+      "5001251113": "Kenar Ayu Setyahani",
+      "5001251025": "Anggun Mili Natasya Lubis",
+      "5001251048": "Fairys Lintang Jannah",
+      "5001251126": "Rayhan Arqam Hidayatullah",
+      "5001251024": "Ikmil Aidida",
+      "5001251067": "Nazira Vilonia Wintoro",
+      "5001251155": "Nik Muhammad Fatih Wildan",
+      "5001251003": "Deo Gratia Putri Sinar",
+      "5001251105": "M. Roikhanul Athar Maulana",
+      "5001251146": "Yasmine Yusnita",
+      "5001251010": "Jauhar Fattan Lazuardi",
+      "5001251075": "Kerwin",
+      "5001251002": "Asturifa Agastya",
+      "5001251032": "Davina Makayla Inaira W.",
+      "5001251069": "Ronalius Chaniago",
+      "5001251071": "Nadin Agistina",
+      "5001251036": "Tazkia Nafsia Az-zahra",
+      "5001251101": "Nafa Savira Putri Wijaya",
+      "5001251134": "Nadina Ayu Yasyfa",
+      "5001251092": "Nindya Nur Azalia",
+      "5001251060": "Dewi Laras Kusumawati",
+      "5001251052": "Tahta Wasiyyatul Hidayah",
+      "5001251156": "Dely Ellizha Putri Aji",
+      "5001251133": "Imroatul Khusniah",
+      "5001251153": "Muhammad Arifin Siregar pahu",
+      "5001251001": "Rennanditya Virta Nanda Pintoko",
+      "5001251157": "Poendra Ragil Bagoes Wiwandra",
+      "5001251066": "Syifa Meilina Azzahra",
+      "5001251079": "Danish Zinedine Putra Ramadhan",
+      "5001251045": "Bunga Ayu Agustina Putri",
+      "5001251142": "Novriansyah Satria",
+      "5001251058": "Diki Adam Maulana"
+    };
+
+    const pesertaTidakLolosBerkas = {
+      // Masukkan NRP yang tidak lolos berkas di sini.
+      // Contoh:
+      // "5001250000": "Nama Peserta"
+    };
+
+    function bukaHalamanHasil() {
+      const nrp = document.getElementById("nrpInput").value.trim();
+
+      if (!nrp) {
+        alert("Silakan masukkan NRP terlebih dahulu.");
+        return;
+      }
+
+      window.location.href = `?nrp=${encodeURIComponent(nrp)}`;
+    }
+
+    function tampilkanHalamanHasil() {
+      const params = new URLSearchParams(window.location.search);
+      const nrp = params.get("nrp");
+
+      if (!nrp) {
+        document.getElementById("homePage").classList.remove("hide");
+        document.getElementById("resultPage").classList.add("hide");
+        return;
+      }
+
+      document.getElementById("homePage").classList.add("hide");
+      document.getElementById("resultPage").classList.remove("hide");
+      cekHasil(nrp.trim());
+    }
+
+    function cekHasil(nrp) {
+      const result = document.getElementById("result");
+
+      if (pesertaLolos[nrp]) {
+        tampilkanLolos(nrp, pesertaLolos[nrp]);
+      } else if (pesertaProses[nrp]) {
+        result.className = "result process";
+        result.innerHTML = `
+          <div class="icon">⏳</div>
+          <h2>Hasil Kamu Masih Dalam Proses</h2>
+          <p>
+            Halo <b>${pesertaProses[nrp]}</b>, data NRP kamu sudah terdaftar,
+            tetapi hasil seleksi Staff Partner Physics Summit kamu masih dalam proses.
+          </p>
+          <div class="name">${pesertaProses[nrp]}<br>${nrp}</div>
+          <p style="margin-top: 16px;">
+            Silakan menunggu informasi selanjutnya dari panitia. Jika ada pertanyaan,
+            kamu dapat menghubungi CP Salwa.
+          </p>
+          <div class="cp-row">
+            <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+              Tanya CP Salwa
+            </a>
+            <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+              Tanya CP Zain
+            </a>
+          </div>
+          <br />
+          <a class="button-link button-back" href="./">
+            Cek NRP Lain
+          </a>
+        `;
+      } else if (pesertaTidakLolosBerkas[nrp]) {
+        result.className = "result fail";
+        result.innerHTML = `
+          <div class="icon">🙏</div>
+          <h2>Terima Kasih Sudah Berpartisipasi</h2>
+          <p>
+            Mohon maaf, <b>NRP tersebut sudah tidak lolos dari seleksi berkas</b>
+            Staff Partner Physics Summit.
+          </p>
+          <div class="name">${pesertaTidakLolosBerkas[nrp]}<br>${nrp}</div>
+          <p style="margin-top: 16px;">
+            Terima kasih atas antusiasme dan partisipasinya. Tetap semangat dan sampai bertemu di kesempatan berikutnya!
+          </p>
+          <div class="cp-row">
+            <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+              Tanya CP Salwa
+            </a>
+            <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+              Tanya CP Zain
+            </a>
+          </div>
+          <br />
+          <a class="button-link button-back" href="./">
+            Cek NRP Lain
+          </a>
+        `;
+      } else {
+        result.className = "result unknown";
+        result.innerHTML = `
+          <div class="icon">⚠️</div>
+          <h2>NRP Tidak Ditemukan</h2>
+          <p>
+            NRP yang kamu masukkan belum terdaftar dalam database pengumuman.
+            Pastikan NRP sudah benar atau hubungi CP Salwa jika ada kendala.
+          </p>
+          <div class="cp-row">
+            <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+              Tanya CP Salwa
+            </a>
+            <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+              Tanya CP Zain
+            </a>
+          </div>
+          <br />
+          <a class="button-link button-back" href="./">
+            Cek NRP Lain
+          </a>
+        `;
+      }
+    }
+
+    function tampilkanLolos(nrp, nama) {
+      const result = document.getElementById("result");
+      const stikerRandom = ambilStikerRandom();
+
+      result.className = "result pass";
+      result.innerHTML = `
+        <div class="icon">🎉</div>
+        <h2>Selamat, Kamu Lolos!</h2>
+        <p>
+          Selamat kepada kamu karena telah dinyatakan <b>LOLOS</b>
+          sebagai Staff Partner Physics Summit.
+        </p>
+        <div class="name">${nama}<br>${nrp}</div>
+
+        <img src="${stikerRandom}" alt="Sticker Lolos" class="sticker-lolos" />
+
+        <div class="info-box">
+          <p>
+            Untuk pembagian divisi, mohon bersabar terlebih dahulu ya.
+            Informasi divisi akan diumumkan saat <b>Welcome Party tanggal 6</b>.
+          </p>
+        </div>
+
+        <p style="margin-top: 16px;">
+          Sebelum masuk ke grup Staff Partner, silakan isi pendataan melalui Google Form terlebih dahulu.
+          Setelah pendataan lengkap, informasi link grup akan menyusul dari panitia.
+        </p>
+
+        <a class="button-link button-gform" href="${linkGFormPendataan}" target="_blank">
+          Isi Pendataan Google Form
+        </a>
+
+        <br />
+
+        <div class="cp-row">
+          <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+            Tanya CP Salwa
+          </a>
+          <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+            Tanya CP Zain
+          </a>
+        </div>
+
+        <br />
+
+        <a class="button-link button-back" href="./">
+          Cek NRP Lain
+        </a>
+      `;
+    }
+
+    document.getElementById("nrpInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        bukaHalamanHasil();
+      }
+    });
+
+    tampilkanHalamanHasil();
+  </script>
+</body>
+</html>
