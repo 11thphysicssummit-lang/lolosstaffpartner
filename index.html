@@ -73,7 +73,7 @@
       margin-bottom: 24px;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 16px 18px;
       border-radius: 16px;
@@ -84,7 +84,7 @@
       color: #08111f;
     }
 
-    input:focus, select:focus {
+    input:focus {
       border-color: #314c96;
       box-shadow: 0 0 0 4px rgba(49, 76, 150, 0.12);
     }
@@ -93,7 +93,7 @@
       flex: 1;
     }
 
-    button, .wa-button {
+    button, .button-link {
       padding: 16px 22px;
       border-radius: 16px;
       border: none;
@@ -108,18 +108,30 @@
       white-space: nowrap;
     }
 
-    button:hover, .wa-button:hover {
+    button:hover, .button-link:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 30px rgba(255, 129, 119, 0.22);
     }
 
-    .wa-button {
-      background: linear-gradient(135deg, #25d366, #9cffb5);
+    .button-gform {
+      background: linear-gradient(135deg, #314c96, #7aa7ff);
+      color: white;
       margin-top: 16px;
     }
 
+    .button-wa {
+      background: linear-gradient(135deg, #25d366, #9cffb5);
+      color: #111827;
+      margin-top: 12px;
+    }
+
+    .button-back {
+      background: #e8f0ff;
+      color: #314c96;
+      margin-top: 12px;
+    }
+
     .result {
-      display: none;
       margin-top: 24px;
       padding: 28px;
       border-radius: 24px;
@@ -127,26 +139,22 @@
       text-align: center;
     }
 
-    .result.pass {
-      display: block;
+    .pass {
       background: linear-gradient(135deg, #ecfff3, #eef8ff);
       border: 1px solid #a7f3d0;
     }
 
-    .result.process {
-      display: block;
+    .process {
       background: linear-gradient(135deg, #fffbea, #eff6ff);
       border: 1px solid #fde68a;
     }
 
-    .result.fail {
-      display: block;
+    .fail {
       background: linear-gradient(135deg, #fff1f2, #fff8e8);
       border: 1px solid #fecaca;
     }
 
-    .result.unknown {
-      display: block;
+    .unknown {
       background: #f8fbff;
       border: 1px solid #dbe8ff;
     }
@@ -175,10 +183,12 @@
       color: #314c96;
     }
 
-    .gform-button {
-      background: linear-gradient(135deg, #314c96, #7aa7ff);
-      color: white;
-      margin-top: 16px;
+    .sticker-lolos {
+      width: min(280px, 100%);
+      display: block;
+      margin: 20px auto 10px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
     }
 
     .info-box {
@@ -190,58 +200,14 @@
       text-align: center;
     }
 
-    .form-card {
-      margin-top: 24px;
-      padding: 22px;
-      border-radius: 22px;
-      background: #f8fbff;
-      border: 1px solid #dbe8ff;
-      text-align: left;
-    }
-
-    .form-card h3 {
-      margin-bottom: 8px;
-      font-size: 22px;
-      color: #1f2a44;
-      text-align: center;
-    }
-
-    .form-card .desc {
-      text-align: center;
-      color: #5b6b88;
-      margin-bottom: 18px;
-      font-size: 15px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #1f2a44;
-      font-weight: 700;
-    }
-
-    .field {
-      margin-bottom: 16px;
-    }
-
-    .note {
-      display: none;
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 18px;
-      background: #ecfff3;
-      border: 1px solid #a7f3d0;
-      text-align: center;
-    }
-
-    .note.show {
-      display: block;
-    }
-
     .footer {
       margin-top: 28px;
       color: #6b7a96;
       font-size: 13px;
+    }
+
+    .hide {
+      display: none;
     }
 
     @keyframes fadeIn {
@@ -264,7 +230,7 @@
         flex-direction: column;
       }
 
-      button, .wa-button {
+      button, .button-link {
         width: 100%;
       }
 
@@ -276,21 +242,29 @@
 </head>
 <body>
   <main class="container">
-    <!-- GANTI NAMA FILE LOGO DI SINI KALAU BEDA -->
-    <img src="logo-physics-summit.png" alt="Logo Physics Summit" class="logo" />
+    <img src="logookk%20(2).png" alt="Logo Physics Summit" class="logo" />
 
     <div class="badge">Physics Summit</div>
-    <h1>Pengumuman Staff Partner</h1>
-    <p class="subtitle">
-      Masukkan NRP kamu untuk melihat hasil seleksi Staff Partner Physics Summit.
-    </p>
 
-    <div class="search-box">
-      <input id="nrpInput" type="text" placeholder="Contoh: 500125xxxx" />
-      <button onclick="cekHasil()">Cek Hasil</button>
-    </div>
+    <section id="homePage">
+      <h1>Pengumuman Staff Partner</h1>
+      <p class="subtitle">
+        Masukkan NRP kamu untuk melihat hasil seleksi Staff Partner Physics Summit.
+      </p>
 
-    <section id="result" class="result"></section>
+      <div class="search-box">
+        <input id="nrpInput" type="text" placeholder="Contoh: 500125xxxx" />
+        <button onclick="bukaHalamanHasil()">Cek Hasil</button>
+      </div>
+    </section>
+
+    <section id="resultPage" class="hide">
+      <h1>Hasil Seleksi</h1>
+      <p class="subtitle">
+        Berikut hasil seleksi berdasarkan NRP yang kamu masukkan.
+      </p>
+      <div id="result"></div>
+    </section>
 
     <p class="footer">
       CP: Salwa | Physics Summit
@@ -299,284 +273,6 @@
 
   <script>
     // =====================================================
-    // DATA PESERTA
-    // pesertaLolos = peserta yang sudah diterima
-    // pesertaProses = peserta yang masih dalam proses
-    // pesertaTidakLolosBerkas = peserta yang tidak lolos seleksi berkas
+    // LINK PENTING
+    // Ganti link Google Form kalau link aslinya sudah ada.
     // =====================================================
-
-    const pesertaLolos = {
-      "5001251139": { nama: "Amanda Silva Zaskia", divisi: "Operational_Medcom" },
-      "5001251040": { nama: "Daniyati Husniyah", divisi: "Operational_Medcom" },
-      "5001251076": { nama: "Najla Zakiya Rizwanny", divisi: "Operational_Medcom" },
-      "5001251110": { nama: "Cika Aline Mauludina", divisi: "Operational_Medcom" },
-      "5001251049": { nama: "Gadis Bunga Nirwana", divisi: "Operational_Medcom" },
-      "5001251008": { nama: "Excellent Friendly Manurung", divisi: "Fundraising" },
-      "5001251028": { nama: "Faradhia Balqis Putri Atmaja", divisi: "Fundraising" },
-      "5001251091": { nama: "Qonita Nurfaizah", divisi: "Fundraising" },
-      "5001251013": { nama: "Valessa Zalsabrina", divisi: "Fundraising" },
-      "5001251077": { nama: "Faradiba Nur Anisa", divisi: "Fundraising" },
-      "5001251056": { nama: "Nurun Fadila", divisi: "Fundraising" },
-      "5001251019": { nama: "Witri Laila", divisi: "Fundraising" },
-      "5001251053": { nama: "Nadia Leena Pratiwi", divisi: "Fundraising" },
-      "5001251021": { nama: "Nur Azizah Anuha", divisi: "Fundraising" },
-      "5001251061": { nama: "ARYA LAYLY MAHARANI", divisi: "Fundraising" },
-      "5001251080": { nama: "Ayu Nisa Aprilia", divisi: "Decoration" },
-      "5001251112": { nama: "Dzaki Ammar muniif", divisi: "Decoration" },
-      "5001251020": { nama: "Novin Zhafira Kwarisd", divisi: "Operational_Medcom" },
-      "5001251106": { nama: "M. Faris Nubaid", divisi: "Decoration" },
-      "5001251104": { nama: "Muhammad Rabbani Adnan Al Awali", divisi: "Decoration" },
-      "5001251078": { nama: "Muhammad Naufal Khalaf", divisi: "Decoration" },
-      "5001251073": { nama: "Muhammad Alfarizi", divisi: "Media Creative_Branding" },
-      "5001251081": { nama: "Muhammad Bayu Ramadhan", divisi: "Decoration" },
-      "5001251103": { nama: "Rurry Septantri Kurniawan", divisi: "Decoration" },
-      "5001251057": { nama: "Asri Tri Wulan Sari", divisi: "Decoration" },
-      "5001251030": { nama: "Muhammad Yusuf Ryan", divisi: "Decoration" },
-      "5001251029": { nama: "Galang Addia Ramadan", divisi: "Decoration" },
-      "5001251116": { nama: "Ilyas", divisi: "Decoration" },
-      "5001251070": { nama: "Wahyu Fauji Sianturi", divisi: "Event_Competition Event" },
-      "5001251095": { nama: "Oktavya Zahra Rachmadhani", divisi: "Event_Competition Event" },
-      "5001251062": { nama: "Ester Salita Br P Bangun", divisi: "Event_Competition Event" },
-      "5001251131": { nama: "Julia Cinta Az Zahra", divisi: "Event_Competition Event" },
-      "5001251022": { nama: "Hanifa Nabi'il Wining", divisi: "Event_Competition Event" },
-      "5001251145": { nama: "Fazle Mawla Febrio Rhizky", divisi: "Event_Competition Event" },
-      "5001251150": { nama: "Muhammad Arnico Natha", divisi: "Event_Competition Event" },
-      "5001251094": { nama: "Athian Syafiq Al Hafidz", divisi: "Event_Main Event" },
-      "5001251018": { nama: "Abil Qumfa Anzir", divisi: "Decoration" },
-      "5001251135": { nama: "Adinda Ayu Anandita", divisi: "Event_Main Event" },
-      "5001251117": { nama: "Jasmine Raqilla Mirza", divisi: "Event_Main Event" },
-      "5001251098": { nama: "O'neall Dewata Giovani", divisi: "Event_Main Event" },
-      "5001251088": { nama: "Khoirun Nisa", divisi: "Event_Main Event" },
-      "5001251017": { nama: "Ahmad Satrio Wicaksono", divisi: "Event_Main Event" },
-      "5001251007": { nama: "Maria Rachel Jochi Carmelita Gurning", divisi: "Event_Main Event" },
-      "5001251044": { nama: "Nahilah", divisi: "Event_Main Event" },
-      "5001251051": { nama: "Verlyta Adjitya Purwaningtyas", divisi: "Decoration" },
-      "5001251100": { nama: "Fajar Faizal", divisi: "Operational_Equiment" },
-      "5001251111": { nama: "Adya Rifhatussholikhah", divisi: "Operational_Equiment" },
-      "5001251041": { nama: "Arya Putra Laksmana", divisi: "Operational_Equiment" },
-      "5001251123": { nama: "Zaidan Fayyadh Ramadhan", divisi: "Operational_Equiment" },
-      "5001251083": { nama: "Nabeel Fatkhan Mubina", divisi: "Operational_Equiment" },
-      "5001251054": { nama: "Argata Viradya Putra Hariesna", divisi: "Operational_Equiment" },
-      "5001251043": { nama: "Muhammad Aryan Yudha Tama", divisi: "Operational_Equiment" },
-      "5001251148": { nama: "Hamim Ayatullah", divisi: "Operational_Equiment" },
-      "5001251035": { nama: "Calvin Alifian Putra Pradana", divisi: "Operational_Equiment" },
-      "5001251132": { nama: "Rifqi Azril Firdaus", divisi: "Operational_Equiment" },
-      "5001251089": { nama: "M Azis Fatchur Ramdhani", divisi: "Operational_Equiment" },
-      "5001251108": { nama: "Muhammad Wafy Al Ahdi K.H", divisi: "Operational_Equiment" },
-      "5001251086": { nama: "Leonardus Adhittya Ande Sura", divisi: "Operational_Equiment" },
-      "5001251124": { nama: "Geovany Pradipta Soeprapto", divisi: "Media Creative_Branding" },
-      "5001251063": { nama: "Erlita Putri Febyanti", divisi: "Media Creative_Branding" },
-      "5001251120": { nama: "Nency Evelyn Alantranaya", divisi: "Material Method_Inovation" },
-      "5001251096": { nama: "Aisyah Mahirani Salsabila", divisi: "Media Creative_Branding" },
-      "5001251014": { nama: "Atia Shalsabela Arifiana", divisi: "Data Management" },
-      "5001251042": { nama: "Gratia Cynthia Setio Maharani", divisi: "Media Creative_Branding" },
-      "5001251149": { nama: "Beryl Vania Alisyah", divisi: "Media Creative_Branding" },
-      "5001251015": { nama: "Tri Ayu Wulandari", divisi: "Media Creative_Branding" },
-      "5001251055": { nama: "savina muzdalifa", divisi: "Sponsor" },
-      "5001251158": { nama: "Neysa Putri Aurelia", divisi: "Sponsor" },
-      "5001251064": { nama: "Anandio Muhammad Abyan Hafish", divisi: "Sponsor" }
-    };
-
-    const pesertaProses = {
-      "5001251122": "Rahmadita Kurnia Putri",
-      "5001251047": "Nazwa Hifzy Hrp",
-      "5001251037": "Dian Rafa Azalea Putri",
-      "5001251121": "Muhammad Daffa Abiyyu Ramdhan",
-      "5001251154": "Gaida Ulayya Aziizah",
-      "5001251031": "Anisa Dwijasista",
-      "5001251072": "Diana Gayatri Utami",
-      "5001251115": "Arga Haris Surya Putra",
-      "5001251130": "Widya Resti Indriyani",
-      "5001251099": "Berliana Ihtyvilla Itqiyah",
-      "5001251011": "Ananda Akbar Choiruna",
-      "5001251102": "Nagmy Daya Rieziequmullah",
-      "5001251026": "Raymond Benaya Kondamara Tidah",
-      "5001251127": "Yefi Ragelia Marshadani",
-      "5001251006": "Syifa Amelia Widyaningrum",
-      "5001251027": "Rahma Nur Annisa",
-      "5001251074": "Lombardi Lumbantoruan",
-      "5001251118": "Riana Salsabela Putri",
-      "5001251009": "Muhamad Irfan Hidayatullah",
-      "5001251012": "Ayn Al Qodiy Zikri Rahullah",
-      "5001251087": "Nikita Firdausi",
-      "5001251114": "Dimas Budi Al Bukhori",
-      "5001251093": "Khansa Zahrotul ‘Arsy",
-      "5001251137": "Tia Salsabila",
-      "5001251085": "Muhammad Mukti Yazdan",
-      "5001251151": "Naufal Abid Affandi",
-      "5001251128": "Dewanda Angga Prameswara",
-      "5001251038": "SONYA WADI RAHMAWATI",
-      "5001251082": "Mohammad Farhan Alwanul Faizin",
-      "5001251059": "Rosalina sijabat",
-      "5001251004": "Fahad Dzaky Abdillah",
-      "5001251138": "Rafli darma kuswandi",
-      "5001251152": "Bima Prakasa Setiawanda",
-      "5001251084": "Hasna Puspakitri Dewi",
-      "5001251046": "Najwa Oktavia Ramadhani",
-      "5001251144": "Daniel Baglrene Krista Caraka",
-      "5001251005": "Aidil Praditya Oktavianto",
-      "5001251090": "Muhammad Rafi`ul Tsany",
-      "5001251136": "Deva Putra Pratama",
-      "5001251016": "Giffar Fahrezi",
-      "5001251119": "Aditya Apriansyah",
-      "5001251141": "Nashya Devanty Putri Walujo",
-      "5001251107": "Elghan Reynatan Artadi",
-      "5001251125": "Kadek Wira Darpawan",
-      "5001251039": "Eca Agustin Rahmawati",
-      "5001251033": "Lohita Sitaresmi",
-      "5001251050": "Dimas Tri Baskoro",
-      "5001251023": "Teguh Agus Susanto",
-      "5001251113": "Kenar Ayu Setyahani",
-      "5001251025": "Anggun Mili Natasya Lubis",
-      "5001251048": "Fairys Lintang Jannah",
-      "5001251126": "Rayhan Arqam Hidayatullah",
-      "5001251024": "Ikmil Aidida",
-      "5001251067": "Nazira Vilonia Wintoro",
-      "5001251155": "Nik Muhammad Fatih Wildan",
-      "5001251003": "Deo Gratia Putri Sinar",
-      "5001251105": "M. Roikhanul Athar Maulana",
-      "5001251146": "Yasmine Yusnita",
-      "5001251010": "Jauhar Fattan Lazuardi",
-      "5001251075": "Kerwin",
-      "5001251002": "Asturifa Agastya",
-      "5001251032": "Davina Makayla Inaira W.",
-      "5001251069": "Ronalius Chaniago",
-      "5001251071": "Nadin Agistina",
-      "5001251036": "Tazkia Nafsia Az-zahra",
-      "5001251101": "Nafa Savira Putri Wijaya",
-      "5001251134": "Nadina Ayu Yasyfa",
-      "5001251092": "Nindya Nur Azalia",
-      "5001251060": "Dewi Laras Kusumawati",
-      "5001251052": "Tahta Wasiyyatul Hidayah",
-      "5001251156": "Dely Ellizha Putri Aji",
-      "5001251133": "Imroatul Khusniah",
-      "5001251153": "Muhammad Arifin Siregar pahu",
-      "5001251001": "Rennanditya Virta Nanda Pintoko",
-      "5001251157": "Poendra Ragil Bagoes Wiwandra",
-      "5001251066": "Syifa Meilina Azzahra",
-      "5001251079": "Danish Zinedine Putra Ramadhan",
-      "5001251045": "Bunga Ayu Agustina Putri",
-      "5001251142": "Novriansyah Satria",
-      "5001251058": "Diki Adam Maulana"
-    };
-
-    const pesertaTidakLolosBerkas = {
-      // Contoh:
-      // "5001250000": "Nama Peserta"
-    };
-
-    const nomorCPSalwa = "6281362192288";
-    const linkGFormPendataan = "https://forms.gle/ISI_LINK_GFORM_DI_SINI";
-
-    function cekHasil() {
-      const input = document.getElementById("nrpInput");
-      const result = document.getElementById("result");
-      const nrp = input.value.trim();
-
-      if (!nrp) {
-        result.className = "result unknown";
-        result.innerHTML = `
-          <div class="icon">🔎</div>
-          <h2>NRP Belum Diisi</h2>
-          <p>Silakan masukkan NRP kamu terlebih dahulu untuk melihat hasil seleksi.</p>
-        `;
-        return;
-      }
-
-      if (pesertaLolos[nrp]) {
-        tampilkanLolos(nrp, pesertaLolos[nrp].nama, pesertaLolos[nrp].divisi);
-      } else if (pesertaProses[nrp]) {
-        result.className = "result process";
-        result.innerHTML = `
-          <div class="icon">⏳</div>
-          <h2>Hasil Kamu Masih Dalam Proses</h2>
-          <p>
-            Halo <b>${pesertaProses[nrp]}</b>, data NRP kamu sudah terdaftar,
-            tetapi hasil seleksi Staff Partner Physics Summit kamu masih dalam proses.
-          </p>
-          <div class="name">${pesertaProses[nrp]}<br>${nrp}</div>
-          <p style="margin-top: 16px;">
-            Silakan menunggu informasi selanjutnya dari panitia. Jika ada pertanyaan,
-            kamu dapat menghubungi CP Salwa.
-          </p>
-          <a class="wa-button" href="https://wa.me/${nomorCPSalwa}" target="_blank">
-            Hubungi CP Salwa
-          </a>
-        `;
-      } else if (pesertaTidakLolosBerkas[nrp]) {
-        result.className = "result fail";
-        result.innerHTML = `
-          <div class="icon">🙏</div>
-          <h2>Terima Kasih Sudah Berpartisipasi</h2>
-          <p>
-            Mohon maaf, <b>NRP tersebut sudah tidak lolos dari seleksi berkas</b>
-            Staff Partner Physics Summit.
-          </p>
-          <div class="name">${pesertaTidakLolosBerkas[nrp]}<br>${nrp}</div>
-          <p style="margin-top: 16px;">
-            Terima kasih atas antusiasme dan partisipasinya. Tetap semangat dan sampai bertemu di kesempatan berikutnya!
-          </p>
-          <a class="wa-button" href="https://wa.me/${nomorCPSalwa}" target="_blank">
-            Hubungi CP Salwa
-          </a>
-        `;
-      } else {
-        result.className = "result unknown";
-        result.innerHTML = `
-          <div class="icon">⚠️</div>
-          <h2>NRP Tidak Ditemukan</h2>
-          <p>
-            NRP yang kamu masukkan belum terdaftar dalam database pengumuman.
-            Pastikan NRP sudah benar atau hubungi CP Salwa.
-          </p>
-          <a class="wa-button" href="https://wa.me/${nomorCPSalwa}" target="_blank">
-            Hubungi CP Salwa
-          </a>
-        `;
-      }
-    }
-
-    function tampilkanLolos(nrp, nama, divisi) {
-      const result = document.getElementById("result");
-      result.className = "result pass";
-      result.innerHTML = `
-        <div class="icon">🎉</div>
-        <h2>Selamat, Kamu Lolos!</h2>
-        <p>
-          Selamat kepada kamu karena telah dinyatakan <b>LOLOS</b>
-          sebagai Staff Partner Physics Summit.
-        </p>
-        <div class="name">${nama}<br>${nrp}</div>
-
-        <div class="info-box">
-          <p>
-            Untuk pembagian divisi, mohon bersabar terlebih dahulu ya.
-            Informasi divisi akan diumumkan saat <b>Welcome Party tanggal 6</b>.
-          </p>
-        </div>
-
-        <p style="margin-top: 16px;">
-          Sebelum masuk ke grup Staff Partner, silakan isi pendataan melalui Google Form terlebih dahulu.
-          Setelah pendataan lengkap, informasi link grup akan menyusul dari panitia.
-        </p>
-
-        <a class="wa-button gform-button" href="${linkGFormPendataan}" target="_blank">
-          Isi Pendataan Google Form
-        </a>
-
-        <br />
-
-        <a class="wa-button" href="https://wa.me/${nomorCPSalwa}" target="_blank">
-          Hubungi CP Salwa jika ada pertanyaan
-        </a>
-      `;
-    }
-
-    document.getElementById("nrpInput").addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        cekHasil();
-      }
-    });
-  </script>
-</body>
-</html>
