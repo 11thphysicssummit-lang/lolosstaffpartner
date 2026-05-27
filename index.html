@@ -487,6 +487,13 @@
     const nomorCPZain = "6281233795775";
     const linkGFormPendataan = "https://intip.in/DataIkomaStaffps/";
 
+    function buatLinkWA(nomor, nama, nrp) {
+      const pesan = encodeURIComponent(
+        `Halo Kak, saya ingin bertanya terkait Staff Partner Physics Summit.\n\nNama: ${nama}\nNRP: ${nrp}\nPesan: `
+      );
+      return `https://wa.me/${nomor}?text=${pesan}`;
+    }
+
     // =====================================================
     // DAFTAR STIKER RANDOM UNTUK PESERTA LOLOS
     // Pastikan nama file di bawah sama persis dengan nama file di GitHub.
@@ -728,10 +735,10 @@
             kamu dapat menghubungi contact person di bawah.
           </p>
           <div class="cp-row">
-            <a class="button-link button-wa" href="https://wa.me/${nomorCPSalwa}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPSalwa, nama, nrp)}"ma belum terdata', nrp)}"ertaTidakLolosBerkas[nrp], nrp)}"ertaProses[nrp], nrp)}" target="_blank">
               Tanya CP Salwa
             </a>
-            <a class="button-link button-wa" href="https://wa.me/${nomorCPZain}" target="_blank">
+            <a class="button-link button-wa" href="${buatLinkWA(nomorCPZain, nama, nrp)}"ma belum terdata', nrp)}"ertaTidakLolosBerkas[nrp], nrp)}"ertaProses[nrp], nrp)}" target="_blank">
               Tanya CP Zain
             </a>
           </div>
@@ -820,6 +827,7 @@
           <p><b>Langkah selanjutnya:</b></p>
           <ul class="info-list">
             <li>Isi Google Form pendataan melalui tombol di bawah.</li>
+            <li>Deadline pengisian pendataan adalah <b>tanggal 3</b>.</li>
             <li>Setelah submit Google Form, akan ada link grup WhatsApp Staff Partner di bagian akhir form.</li>
             <li>Link grup <b>jangan disebarkan</b>.</li>
             <li>Setelah mendapatkan link, silakan langsung masuk ke grup ya.</li>
